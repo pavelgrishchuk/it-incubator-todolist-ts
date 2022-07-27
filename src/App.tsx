@@ -20,21 +20,19 @@ function App() {
     }
 
     const addTask = (title: string) => {
-        setTasks([{
-            id: v1(),
-            title: title,
-            isDone: false
-        }, ...tasks])
+        const id = v1()
+        const isDone = false
+        setTasks([{id, title, isDone}, ...tasks])
     }
 
     const [filter, setFilter] = useState<FilterValuesType>("all")
     let tasksForRender;
     switch (filter) {
         case "completed":
-            tasksForRender = tasks.filter(t => t.isDone === true)
+            tasksForRender = tasks.filter(t => t.isDone)
             break
         case "active":
-            tasksForRender = tasks.filter(t => t.isDone === false)
+            tasksForRender = tasks.filter(t => !t.isDone)
             break
         default:
             tasksForRender = tasks
